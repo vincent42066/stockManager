@@ -11,13 +11,12 @@ import { appRoutingModule } from './app.routing';
 
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
-import { LoginComponent } from './login';;
-import { ManageStoresComponent } from './manage-stores/manage-stores.component'
-;
-import { ManageUsersComponent } from './manage-users/manage-users.component'
-;
+import { LoginComponent } from './login';
+import { ManageStoresComponent } from './manage-stores/manage-stores.component';
+import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageShelfComponent } from './manage-shelf/manage-shelf.component';
 import { ManageStockComponent } from './manage-stock/manage-stock.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
 @NgModule({
     imports: [
         BrowserModule,
@@ -33,7 +32,8 @@ import { ManageStockComponent } from './manage-stock/manage-stock.component';
         ManageStoresComponent ,
         ManageUsersComponent ,
         ManageShelfComponent ,
-        ManageStockComponent ],
+        ManageStockComponent ,
+        ProductDetailsComponent],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
