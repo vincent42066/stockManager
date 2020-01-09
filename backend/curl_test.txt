@@ -1,0 +1,1 @@
+curl -d "name=JEANNE&firstname=Pierre&address=46 boulevard de chinon&mail=pierre.jeanne96@gmail.com&password=mdp&level=1&shop=magasin1&section=rayon1&function=job1" -X POST http://localhost:5002/suscribe
