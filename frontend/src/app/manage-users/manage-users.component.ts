@@ -5,13 +5,13 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Router } from "@angular/router";
 
  
-export interface StoresData {
+export interface UsersData {
   name: string;
   id: number;
   poste: string;
 }
  
-const ELEMENT_DATA: StoresData[] = [
+const ELEMENT_DATA: UsersData[] = [
   {id: 0, name: 'Vincent Desnos', poste: 'Chef de Rayon'},
   {id: 1, name: 'Pierre Jeanne', poste: 'Vendeur'},
   {id: 3, name: 'Hugo Pohier', poste: 'Directeur'},
@@ -79,6 +79,9 @@ export class ManageUsersComponent implements OnInit {
   }
   goToStore(element){
     this.router.navigateByUrl('/manage-users', { state: element });
+  }
+  goToShelf(){
+    this.router.navigateByUrl('/manage-shelf');
   }
 
 

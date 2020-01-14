@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export interface UsersData {
   name: string;
   id: number;
+  poste: string;
 }
 
 @Component({
