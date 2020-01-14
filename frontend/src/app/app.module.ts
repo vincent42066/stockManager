@@ -8,6 +8,18 @@ import { fakeBackendProvider } from './_helpers';
 
 import { AppComponent } from './app.component';
 import { appRoutingModule } from './app.routing';
+import { FormsModule } from '@angular/forms';
+
+import { 
+    MatTableModule, 
+    MatDialogModule, 
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule
+  } from '@angular/material';
+
+  import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+  
 
 import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
@@ -17,23 +29,34 @@ import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageShelfComponent } from './manage-shelf/manage-shelf.component';
 import { ManageStockComponent } from './manage-stock/manage-stock.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { DialogBoxComponent } from './dialog-box/dialog-box.component';
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
-        appRoutingModule
+        appRoutingModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        MatTableModule,
+        MatDialogModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatInputModule
     ],
     declarations: [
         AppComponent,
         HomeComponent,
-        LoginComponent
-,
+        LoginComponent,
         ManageStoresComponent ,
         ManageUsersComponent ,
         ManageShelfComponent ,
         ManageStockComponent ,
+        DialogBoxComponent,
         ProductDetailsComponent],
+        
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
@@ -41,6 +64,9 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
         // provider used to create fake backend
         fakeBackendProvider
     ],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
+    entryComponents: [
+        DialogBoxComponent
+      ],
 })
 export class AppModule { }
