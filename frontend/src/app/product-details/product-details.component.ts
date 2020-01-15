@@ -1,5 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+ 
+import { MatDialog, MatTable } from '@angular/material';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { Router } from "@angular/router";
 
+ 
+export interface StockData {
+  name: string;
+  id: number;
+  stock: number;
+  prix: number;
+  description: string;
+}
+ 
+const ELEMENT_DATA: StockData[] = [
+  {id: 0, name: 'chaussure',description:"c'est un article", stock: 15, prix: 17.15},
+];
 @Component({
   selector: 'app-product-details',
   templateUrl: './product-details.component.html',
@@ -7,14 +23,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductDetailsComponent implements OnInit {
 
-  elements: any = [
-    {id: 1, first: 'Pouma R5', last: '54.99€', handle: '3'},
-    {id: 2, first: 'Nique V12', last: '119.99€', handle: '2'},
-    {id: 3, first: 'Abidas lvl 2', last: '89.99€', handle: '4'},
-  ];
+  displayedColumns: string[] = ['id', 'name','description', 'prix','stock'];
+  dataSource = ELEMENT_DATA;
+ 
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+
+  constructor( public dialog: MatDialog, private router: Router) { 
+    var test = this.router.getCurrentNavigation().extras.state
+    console.log(test);
+  }
 
   headElements = ['ID', 'Nom', 'prix', 'Quantité'];
   ngOnInit() {
+  }
+ 
+
+  goToStock(element){
+    this.router.navigateByUrl('/manage-stock', { state: element });
   }
 
 }
