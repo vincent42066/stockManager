@@ -77,11 +77,12 @@ export class ManageUsersComponent implements OnInit {
       return value.id != row_obj.id;
     });
   }
-  goToStore(element){
-    this.router.navigateByUrl('/manage-users', { state: element });
-  }
+
   goToShelf(){
     this.router.navigateByUrl('/manage-shelf');
+  }
+  goToStores(element){
+    this.router.navigateByUrl('/manage-stores', { state: element });
   }
 
 

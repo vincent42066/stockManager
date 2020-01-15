@@ -2,6 +2,7 @@
  
     <button mat-button (click)="openDialog('Add',{})" mat-flat-button color="primary">Ajouter un user</button>
     <button mat-button (click)="goToShelf('Add',{})" mat-flat-button color="primary">Consulter les rayons</button>
+    <button mat-button (click)="goToStores(element)" mat-flat-button color="primary">Retour aux magasins</button>
    
     <table mat-table [dataSource]="dataSource" #mytable class="my-table mat-elevation-z8">
    
@@ -38,5 +39,4 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-   
   </div>
