@@ -4,7 +4,22 @@
     <input placeholder="{{action}} Name" matInput [(ngModel)]="local_data.name">
   </mat-form-field>
   <mat-form-field *ngIf="action != 'Delete'">
-    <input placeholder="{{action}} Poste" matInput [(ngModel)]="local_data.poste">
+    <!-- <input placeholder="{{action}} Stock" matInput > -->
+    <select matInput [(ngModel)]="local_data.poste">
+      <option value="PDG">PDG</option>
+      <option value="Directeur">Directeur</option>
+      <option value="Chef de rayon">Chef de rayon</option>
+      <option value="Vendeur">Vendeur</option>
+    </select>
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Delete'">
+    <input placeholder="{{action}} Stock" matInput [(ngModel)]="local_data.stock">
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Delete'">
+    <input placeholder="{{action}} price" matInput [(ngModel)]="local_data.price">
+  </mat-form-field>
+  <mat-form-field *ngIf="action != 'Delete'">
+    <input placeholder="{{action}} description" matInput [(ngModel)]="local_data.description">
   </mat-form-field>
   <ng-template #elseTemplate>
     Etes vous sûre de suprimmer : <b>{{local_data.name}}</b>?
