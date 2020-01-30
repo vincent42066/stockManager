@@ -18,11 +18,11 @@ import {
     MatButtonModule
   } from '@angular/material';
 
-  import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-  
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { BasicAuthInterceptor, ErrorInterceptor } from './_helpers';
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { HomeComponent } from './home';
+import { AdminComponent } from './admin';
 import { LoginComponent } from './login';
 import { ManageStoresComponent } from './manage-stores/manage-stores.component';
 import { ManageUsersComponent } from './manage-users/manage-users.component';
@@ -30,13 +30,14 @@ import { ManageShelfComponent } from './manage-shelf/manage-shelf.component';
 import { ManageStockComponent } from './manage-stock/manage-stock.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
+
 @NgModule({
     imports: [
         BrowserModule,
         ReactiveFormsModule,
         HttpClientModule,
         appRoutingModule,
-        BrowserModule,
+		BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         MatTableModule,
@@ -49,24 +50,26 @@ import { DialogBoxComponent } from './dialog-box/dialog-box.component';
     declarations: [
         AppComponent,
         HomeComponent,
+        AdminComponent,
         LoginComponent,
-        ManageStoresComponent ,
+		ManageStoresComponent ,
         ManageUsersComponent ,
         ManageShelfComponent ,
         ManageStockComponent ,
         DialogBoxComponent,
-        ProductDetailsComponent],
-        
+        ProductDetailsComponent
+    ],
     providers: [
-        { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
 
         // provider used to create fake backend
         fakeBackendProvider
     ],
     bootstrap: [AppComponent],
-    entryComponents: [
+	 entryComponents: [
         DialogBoxComponent
       ],
 })
+
 export class AppModule { }
