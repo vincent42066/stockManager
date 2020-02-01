@@ -71,9 +71,14 @@ export class ManageShelfComponent implements OnInit {
     });
   }
   deleteRowData(row_obj){
-    this.dataSource = this.dataSource.filter((value,key)=>{
-      return value.id != row_obj.id;
-    });
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+        if (currentUser.role === Role.Admin) {
+          this.dataSource = this.dataSource.filter((value,key)=>{
+          return value.id != row_obj.id;
+        });
+        }
+     }
   }
 
   goToStock(element){

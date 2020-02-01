@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTable } from '@angular/material';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Router } from "@angular/router";
-
+import { AuthenticationService } from '@app/_services';
+import { Role } from '../_models/role';
  
 export interface StoresData {
   name: string;
@@ -28,9 +29,15 @@ export class ManageStoresComponent implements OnInit {
  
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
 
-  constructor(public dialog: MatDialog, private router: Router) { }
+  constructor(public dialog: MatDialog, private router: Router, private authenticationService: AuthenticationService) { }
 
   ngOnInit() {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+        if (currentUser.role === Role.User) {
+          this.router.navigate(['/manage-shelf']);
+        }
+    }
   }
   openDialog(action,obj) {
     obj.action = action;
