@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatTable } from '@angular/material';
 import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Router } from "@angular/router";
-
+import { AuthenticationService } from '@app/_services';
+import { Role } from '../_models/role';
  
 export interface ShelfData {
   name: string;
@@ -27,7 +28,7 @@ export class ManageShelfComponent implements OnInit {
  
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
 
-  constructor( public dialog: MatDialog, private router: Router) { 
+  constructor( public dialog: MatDialog, private router: Router, private authenticationService: AuthenticationService) { 
     var test = this.router.getCurrentNavigation().extras.state
     console.log(test);
   }
@@ -79,7 +80,12 @@ export class ManageShelfComponent implements OnInit {
     this.router.navigateByUrl('/manage-stock', { state: element });
   }
   goToStore(element){
-    this.router.navigateByUrl('/manage-users', { state: element });
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+        if (currentUser.role === Role.Admin) {
+          this.router.navigateByUrl('/manage-users', { state: element });
+        }
+      }
   }
 
 }
