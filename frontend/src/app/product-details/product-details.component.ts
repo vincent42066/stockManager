@@ -33,7 +33,7 @@ export class ProductDetailsComponent implements OnInit {
     console.log(test);
   }
 
-  headElements = ['ID', 'Nom', 'prix', 'Quantité'];
+  headElements = ['ID', 'Nom', 'Prix', 'Quantité'];
   ngOnInit() {
   }
  

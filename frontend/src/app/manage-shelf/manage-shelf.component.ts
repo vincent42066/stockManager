@@ -5,12 +5,12 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Router } from "@angular/router";
 import { AuthenticationService } from '@app/_services';
 import { Role } from '../_models/role';
- 
+
 export interface ShelfData {
   name: string;
   id: number;
 }
- 
+
 const ELEMENT_DATA: ShelfData[] = [
   {id: 0, name: 'Natation',},
   {id: 1, name: 'Tennis',},
@@ -84,13 +84,4 @@ export class ManageShelfComponent implements OnInit {
   goToStock(element){
     this.router.navigateByUrl('/manage-stock', { state: element });
   }
-  goToStore(element){
-    const currentUser = this.authenticationService.currentUserValue;
-    if (currentUser) {
-        if (currentUser.role === Role.Admin) {
-          this.router.navigateByUrl('/manage-users', { state: element });
-        }
-      }
-  }
-
 }

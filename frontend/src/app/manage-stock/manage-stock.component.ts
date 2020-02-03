@@ -81,7 +81,7 @@ export class ManageStockComponent implements OnInit {
   goToDetails(element){
     this.router.navigateByUrl('/product-details', { state: element });
   }
-  goToShelf(element){
+  goToShelves(element){
     this.router.navigateByUrl('/manage-shelf', { state: element });
   }
 

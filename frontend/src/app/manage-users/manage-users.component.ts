@@ -41,6 +41,16 @@ export class ManageUsersComponent implements OnInit {
   }
   
   ngOnInit() {
+    const currentUser = this.authenticationService.currentUserValue;
+    if (currentUser) {
+        if (currentUser.role != Role.SuperAdmin ) 
+        {
+          if(currentUser.role != Role.Admin)
+          {
+            this.router.navigate(['/manage-shelf']);
+          }
+        }
+    }
   }
   openDialog(action,obj) {
     obj.action = action;
@@ -88,14 +98,4 @@ export class ManageUsersComponent implements OnInit {
       return value.id != row_obj.id;
     });
   }
-
-  goToShelf(){
-    this.router.navigateByUrl('/manage-shelf');
-  }
-  goToStores(element){
-    
-    this.router.navigateByUrl('/manage-stores', { state: element });
-  }
-
-
 }
