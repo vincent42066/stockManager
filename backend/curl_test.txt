@@ -1,1 +1,21 @@
 curl -d "name=JEANNE&firstname=Pierre&address=46 boulevard de chinon&mail=pierre.jeanne96@gmail.com&password=mdp&level=1&shop=magasin1&section=rayon1&function=job1" -X POST http://localhost:5002/suscribe
+
+
+curl -d "mail=pierre.jeanne96@gmail.com" -X POST http://localhost:5002/getuserfrommail
+
+curl http://localhost:5002/getshops
+
+curl -G http://localhost:5002/getshopsfromID -d "ID=0"
+
+
+curl -G http://localhost:5002/getshopsSectionfromID -d "ID=0"*
+
+
+curl -G http://localhost:5002/getItemfromSectionID -d "ID=1"
+
+curl -G http://localhost:5002/getUserFromShopID -d "ID=0"
+
+
+curl -d "ID=1&Amount=27" -X POST http://localhost:5002/updateAmountItem
+
+
