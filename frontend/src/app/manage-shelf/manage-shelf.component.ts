@@ -14,8 +14,8 @@ export interface ShelfData {
 const ELEMENT_DATA: ShelfData[] = [
   {id: 0, name: 'Natation',},
   {id: 1, name: 'Tennis',},
-  {id: 3, name: 'Musculation',},
-  {id: 4, name: 'Yoga'}
+  {id: 2, name: 'Musculation',},
+  {id: 3, name: 'Yoga'}
 ];
 @Component({
   selector: 'app-manage-shelf',
@@ -43,11 +43,11 @@ export class ManageShelfComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result.event == 'Add'){
+      if(result.event == 'Add_shelf'){
         this.addRowData(result.data);
-      }else if(result.event == 'Update'){
+      }else if(result.event == 'Update_shelf'){
         this.updateRowData(result.data);
-      }else if(result.event == 'Delete'){
+      }else if(result.event == 'Delete_shelf'){
         this.deleteRowData(result.data);
       }
     });

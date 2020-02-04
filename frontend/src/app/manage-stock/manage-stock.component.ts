@@ -8,14 +8,16 @@ import { Router } from "@angular/router";
 export interface StockData {
   name: string;
   id: number;
-  stock: number;
+  amount: number;
+  price: number;
+  description: string;
 }
  
 const ELEMENT_DATA: StockData[] = [
-  {id: 0, name: 'chaussure', stock: 15,},
-  {id: 1, name: 'balles', stock: 15},
-  {id: 3, name: 'veste', stock: 15,},
-  {id: 4, name: 'parpain', stock: 15}
+  {id: 0, name: 'chaussure', amount: 15, price: 17.15, description: ''},
+  {id: 1, name: 'balles', amount: 15, price: 5.50, description: ''},
+  {id: 3, name: 'veste', amount: 15, price: 39.99, description: ''},
+  {id: 4, name: 'parpain', amount: 15, price: 20.00, description: ''}
 ];
 @Component({
   selector: 'app-manage-stock',
@@ -23,7 +25,7 @@ const ELEMENT_DATA: StockData[] = [
   styleUrls: ['./manage-stock.component.less']
 })
 export class ManageStockComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'stock', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'amount', 'price', 'action'];
   dataSource = ELEMENT_DATA;
  
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
@@ -43,11 +45,11 @@ export class ManageStockComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result.event == 'Add'){
+      if(result.event == 'Add_item'){
         this.addRowData(result.data);
-      }else if(result.event == 'Update'){
+      }else if(result.event == 'Update_item'){
         this.updateRowData(result.data);
-      }else if(result.event == 'Delete'){
+      }else if(result.event == 'Delete_item'){
         this.deleteRowData(result.data);
       }
     });
@@ -58,7 +60,9 @@ export class ManageStockComponent implements OnInit {
     this.dataSource.push({
       id:d.getTime(),
       name:row_obj.name,
-      stock:row_obj.stock
+      amount:row_obj.amount,
+      price: row_obj.price,
+      description: row_obj.description
     });
     this.table.renderRows();
     
@@ -67,7 +71,9 @@ export class ManageStockComponent implements OnInit {
     this.dataSource = this.dataSource.filter((value,key)=>{
       if(value.id == row_obj.id){
         value.name = row_obj.name;
-        value.stock = row_obj.stock;
+        value.amount = row_obj.amount;
+        value.price = row_obj.price;
+        value.description = row_obj.description;
       }
       return true;
     });

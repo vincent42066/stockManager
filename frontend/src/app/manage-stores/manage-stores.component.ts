@@ -39,4 +39,8 @@ export class ManageStoresComponent implements OnInit {
         }
     }
   }
+
+  goToShelves(element){
+    this.router.navigate(['/manage-shelf']);
+  }
 }

@@ -11,16 +11,17 @@ import { Role } from '../_models/role';
 
 export interface UsersData {
   name: string;
+  first_name: string;
   id: number;
   poste: string;
-  
+  role: Role;
 }
  
 const ELEMENT_DATA: UsersData[] = [
-  {id: 0, name: 'Vincent Desnos', poste: 'Chef de Rayon'},
-  {id: 1, name: 'Pierre Jeanne', poste: 'Vendeur'},
-  {id: 3, name: 'Hugo Pohier', poste: 'Directeur'},
-  {id: 4, name: 'Geoffrey Corduan', poste: 'Admin'}
+  {id: 0, name: 'Desnos', first_name: 'Vincent', poste: 'Chef de Rayon', role: Role.User},
+  {id: 1, name: 'Jeanne', first_name: 'Pierre', poste: 'Vendeur', role: Role.User},
+  {id: 2, name: 'Pohier', first_name: 'Hugo', poste: 'Directeur', role: Role.Admin},
+  {id: 3, name: 'Corduan', first_name: 'Geoffrey', poste: 'PDG', role: Role.SuperAdmin}
 ];
 
 
@@ -30,7 +31,7 @@ const ELEMENT_DATA: UsersData[] = [
   styleUrls: ['./manage-users.component.less']
 })
 export class ManageUsersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'poste', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'first_name', 'poste', 'role', 'action'];
   dataSource = ELEMENT_DATA;
   
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
@@ -60,11 +61,11 @@ export class ManageUsersComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result.event == 'Add'){
+      if(result.event == 'Add_user'){
         this.addRowData(result.data);
-      }else if(result.event == 'Update'){
+      }else if(result.event == 'Update_user'){
         this.updateRowData(result.data);
-      }else if(result.event == 'Delete'){
+      }else if(result.event == 'Delete_user'){
         this.deleteRowData(result.data);
       }
     });
@@ -78,7 +79,9 @@ export class ManageUsersComponent implements OnInit {
           this.dataSource.push({
             id:d.getTime(),
             name:row_obj.name,
-            poste:row_obj.poste
+            first_name:row_obj.first_name,
+            poste:row_obj.poste,
+            role: row_obj.role
           });
           this.table.renderRows();
            return true;
@@ -89,6 +92,9 @@ export class ManageUsersComponent implements OnInit {
     this.dataSource = this.dataSource.filter((value,key)=>{
       if(value.id == row_obj.id){
         value.name = row_obj.name;
+        value.first_name = row_obj.first_name;
+        value.poste = row_obj.poste;
+        value.role = row_obj.role;
       }
       return true;
     });
