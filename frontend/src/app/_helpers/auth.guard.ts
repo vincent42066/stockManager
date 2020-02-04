@@ -33,6 +33,12 @@ export class AuthGuard implements CanActivate {
                 return true;
             }
 
+            if (currentUser.role === Role.SuperAdmin) {
+                // role not authorised so redirect to home page
+                this.router.navigate(['/manage-stores']);
+                return true;
+            }
+
             // authorised so return true
             return true;
         }
