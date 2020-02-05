@@ -1,4 +1,5 @@
 ﻿import { Role } from "./role";
+import { Poste } from './poste';
 
 export class User {
     id: number;
@@ -7,5 +8,6 @@ export class User {
     firstName: string;
     lastName: string;
     role: Role;
+    poste: Poste;
     token?: string;
 }

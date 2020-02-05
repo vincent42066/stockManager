@@ -5,7 +5,7 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Router } from "@angular/router";
 import { AuthenticationService } from '@app/_services';
 import { Role } from '../_models/role';
-import { User } from '@app/_models';
+import { User, Poste } from '@app/_models';
 
 export interface ShelfData {
   name: string;
@@ -43,6 +43,16 @@ export class ManageShelfComponent implements OnInit {
         return true;
      }
     return false;
+    }
+  }
+
+  isPoste() {
+    const currentUser = this.authenticationService.currentUserValue;
+    if(currentUser) {
+      if (currentUser.role === Role.User && currentUser.poste === Poste.Natation) {
+        return true;
+      }
+      return false;
     }
   }
   ngOnInit() {
