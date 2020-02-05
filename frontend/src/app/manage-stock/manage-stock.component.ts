@@ -6,18 +6,19 @@ import { Router } from "@angular/router";
 
  
 export interface StockData {
-  name: string;
   id: number;
+  name: string;
+  category: string;
   amount: number;
   price: number;
   description: string;
 }
  
 const ELEMENT_DATA: StockData[] = [
-  {id: 0, name: 'chaussure', amount: 15, price: 17.15, description: ''},
-  {id: 1, name: 'balles', amount: 15, price: 5.50, description: ''},
-  {id: 3, name: 'veste', amount: 15, price: 39.99, description: ''},
-  {id: 4, name: 'parpain', amount: 15, price: 20.00, description: ''}
+  {id: 0, name: 'Nike R MAX', category: 'Running', amount: 15, price: 175.00, description: 'Chaussures très idéales pour faire un footing.'},
+  {id: 1, name: 'Balle de tennis', category: 'Sports de raquette', amount: 15, price: 5.50, description: ''},
+  {id: 3, name: 'Veste Puma', category: 'Running', amount: 15, price: 39.99, description: ''},
+  {id: 4, name: 'Gants de boxe', category: 'Sports de combat', amount: 15, price: 20.00, description: ''}
 ];
 @Component({
   selector: 'app-manage-stock',
@@ -25,7 +26,7 @@ const ELEMENT_DATA: StockData[] = [
   styleUrls: ['./manage-stock.component.less']
 })
 export class ManageStockComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'amount', 'price', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'category', 'amount', 'price', 'action'];
   dataSource = ELEMENT_DATA;
  
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
@@ -60,6 +61,7 @@ export class ManageStockComponent implements OnInit {
     this.dataSource.push({
       id:d.getTime(),
       name:row_obj.name,
+      category: row_obj.category,
       amount:row_obj.amount,
       price: row_obj.price,
       description: row_obj.description
@@ -71,6 +73,7 @@ export class ManageStockComponent implements OnInit {
     this.dataSource = this.dataSource.filter((value,key)=>{
       if(value.id == row_obj.id){
         value.name = row_obj.name;
+        value.category = row_obj.category;
         value.amount = row_obj.amount;
         value.price = row_obj.price;
         value.description = row_obj.description;

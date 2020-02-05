@@ -32,6 +32,13 @@
   <mat-form-field *ngIf="action == 'Add_item' || action == 'Update_item'">
     <input placeholder="Description" matInput [(ngModel)]="local_data.description">
   </mat-form-field>
+  <mat-form-field *ngIf="action == 'Add_item' || action == 'Update_item'">
+    <select matInput [(ngModel)]="local_data.category" placeholder="Catégorie">
+      <option value='Running'>Running</option>
+      <option value='Sports de raquette'>Sports de raquette</option>
+      <option value='Sports de combat'>Sports de combat</option>
+    </select>
+  </mat-form-field>
   <div *ngIf="action == 'Delete_shelf' || action == 'Delete_item'">
     Etes vous sûr de supprimer : <b>{{local_data.name}}</b>?<br/>
   </div>

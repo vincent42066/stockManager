@@ -6,15 +6,16 @@ import { Router } from "@angular/router";
 
  
 export interface StockData {
-  name: string;
   id: number;
-  stock: number;
-  prix: number;
+  name: string;
+  category: string;
+  amount: number;
+  price: number;
   description: string;
 }
  
 const ELEMENT_DATA: StockData[] = [
-  {id: 0, name: 'chaussure',description:"c'est un article", stock: 15, prix: 17.15},
+  {id: 0, name: 'Nike R MAX', category: 'Running', amount: 15, price: 175.00, description: 'Chaussures très idéales pour faire un footing.'}
 ];
 @Component({
   selector: 'app-product-details',
@@ -23,7 +24,7 @@ const ELEMENT_DATA: StockData[] = [
 })
 export class ProductDetailsComponent implements OnInit {
 
-  displayedColumns: string[] = ['id', 'name','description', 'prix','stock'];
+  displayedColumns: string[] = ['id', 'name', 'category', 'price', 'amount', 'description'];
   dataSource = ELEMENT_DATA;
  
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
@@ -33,7 +34,7 @@ export class ProductDetailsComponent implements OnInit {
     console.log(test);
   }
 
-  headElements = ['ID', 'Nom', 'Prix', 'Quantité'];
+  headElements = ['ID', 'Nom', 'Catégorie', 'Prix', 'Quantité', 'Description'];
   ngOnInit() {
   }
  
