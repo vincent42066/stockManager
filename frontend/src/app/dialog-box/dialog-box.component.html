@@ -9,6 +9,15 @@
     <input placeholder="Prénom" matInput [(ngModel)]="local_data.first_name">
   </mat-form-field>
   <mat-form-field *ngIf="action == 'Add_user' || action == 'Update_user'">
+    <input placeholder="Adresse" matInput [(ngModel)]="local_data.address">
+  </mat-form-field>
+  <mat-form-field *ngIf="action == 'Add_user' || action == 'Update_user'">
+    <input placeholder="Email" matInput [(ngModel)]="local_data.email">
+  </mat-form-field>
+  <mat-form-field *ngIf="action == 'Add_user' || action == 'Update_user'">
+    <input placeholder="Password" matInput [(ngModel)]="local_data.pwd">
+  </mat-form-field>
+  <mat-form-field *ngIf="action == 'Add_user' || action == 'Update_user'">
     <select matInput [(ngModel)]="local_data.poste">
       <option value="PDG">PDG</option>
       <option value="Directeur">Directeur</option>
@@ -21,6 +30,12 @@
       <option value='User'>User</option>
       <option value='Admin'>Admin</option>
       <option value='SuperAdmin'>SuperAdmin</option>
+    </select>
+  </mat-form-field>
+  <mat-form-field *ngIf="action == 'Add_user' || action == 'Update_user'">
+    <select matInput [(ngModel)]="local_data.role" placeholder="Bloqué">
+      <option [ngValue]="true">Oui</option>
+      <option [ngValue]="false">Non</option>
     </select>
   </mat-form-field>
   <mat-form-field *ngIf="action == 'Add_item' || action == 'Update_item'">

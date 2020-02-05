@@ -6,22 +6,23 @@ import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from
 import { AuthenticationService } from '@app/_services';
 import { Role } from '../_models/role';
 
-
-
-
 export interface UsersData {
+  id: number;
   name: string;
   first_name: string;
-  id: number;
   poste: string;
   role: Role;
+  address: string;
+  email: string;
+  pwd: string;
+  blocked: boolean;
 }
  
 const ELEMENT_DATA: UsersData[] = [
-  {id: 0, name: 'Desnos', first_name: 'Vincent', poste: 'Chef de Rayon', role: Role.User},
-  {id: 1, name: 'Jeanne', first_name: 'Pierre', poste: 'Vendeur', role: Role.User},
-  {id: 2, name: 'Pohier', first_name: 'Hugo', poste: 'Directeur', role: Role.Admin},
-  {id: 3, name: 'Corduan', first_name: 'Geoffrey', poste: 'PDG', role: Role.SuperAdmin}
+  {id: 0, name: 'Desnos', first_name: 'Vincent', poste: 'Chef de Rayon', address: '', role: Role.User, email: 'vunssant.DesNeaux@gmail.com', pwd: 'charo_c_charo', blocked: false},
+  {id: 1, name: 'Jeanne', first_name: 'Pierre', poste: 'Vendeur', address: '', role: Role.User, email: 'XxPJdu37xX@wanadoo.com', pwd: 'drone_swag', blocked: true},
+  {id: 2, name: 'Pohier', first_name: 'Hugo', poste: 'Directeur', address: '', role: Role.Admin, email: 'hugo.pohier@gmail.com', pwd: 'TOEIC_780_bis', blocked: false},
+  {id: 3, name: 'Corduan', first_name: 'Geoffrey', poste: 'PDG', address: '', role: Role.SuperAdmin, email: 'jojo.corduan_bleu@gmail.com', pwd: 'TOEIC_780', blocked: false}
 ];
 
 
@@ -31,7 +32,7 @@ const ELEMENT_DATA: UsersData[] = [
   styleUrls: ['./manage-users.component.less']
 })
 export class ManageUsersComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'name', 'first_name', 'poste', 'role', 'action'];
+  displayedColumns: string[] = ['id', 'name', 'first_name', 'email', 'poste', 'role', 'action'];
   dataSource = ELEMENT_DATA;
   
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
@@ -81,7 +82,11 @@ export class ManageUsersComponent implements OnInit {
             name:row_obj.name,
             first_name:row_obj.first_name,
             poste:row_obj.poste,
-            role: row_obj.role
+            role: row_obj.role,
+            address: row_obj.address,
+            email: row_obj.email,
+            pwd: row_obj.pwd,
+            blocked: row_obj.blocked
           });
           this.table.renderRows();
            return true;
@@ -95,6 +100,10 @@ export class ManageUsersComponent implements OnInit {
         value.first_name = row_obj.first_name;
         value.poste = row_obj.poste;
         value.role = row_obj.role;
+        value.address = row_obj.address
+        value.email = row_obj.email;
+        value.pwd = row_obj.pwd;
+        value.blocked = row_obj.blocked;
       }
       return true;
     });
