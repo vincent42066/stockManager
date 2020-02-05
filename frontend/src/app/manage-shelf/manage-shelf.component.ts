@@ -5,10 +5,12 @@ import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
 import { Router } from "@angular/router";
 import { AuthenticationService } from '@app/_services';
 import { Role } from '../_models/role';
+import { User } from '@app/_models';
 
 export interface ShelfData {
   name: string;
   id: number;
+
 }
 
 const ELEMENT_DATA: ShelfData[] = [
@@ -25,6 +27,7 @@ const ELEMENT_DATA: ShelfData[] = [
 export class ManageShelfComponent implements OnInit {
   displayedColumns: string[] = ['id', 'name', 'action'];
   dataSource = ELEMENT_DATA;
+  
  
   @ViewChild(MatTable,{static:true}) table: MatTable<any>;
 
@@ -33,8 +36,18 @@ export class ManageShelfComponent implements OnInit {
     console.log(test);
   }
 
+  isAdmin() {
+    const currentUser = this.authenticationService.currentUserValue;
+    if(currentUser) {
+      if (currentUser.role === Role.Admin || currentUser.role === Role.SuperAdmin) {
+        return true;
+     }
+    return false;
+    }
+  }
   ngOnInit() {
   }
+  
   openDialog(action,obj) {
     obj.action = action;
     const dialogRef = this.dialog.open(DialogBoxComponent, {
@@ -73,7 +86,7 @@ export class ManageShelfComponent implements OnInit {
   deleteRowData(row_obj){
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
-        if (currentUser.role === Role.Admin) {
+        if (currentUser.role === Role.Admin || currentUser.role === Role.SuperAdmin) {
           this.dataSource = this.dataSource.filter((value,key)=>{
           return value.id != row_obj.id;
         });

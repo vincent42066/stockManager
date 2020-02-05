@@ -1,7 +1,7 @@
 <div class="container text-center">
  
     
-    <button mat-button (click)="openDialog('Add_shelf',{})" mat-flat-button color="primary">Ajouter un rayon</button>
+    <button mat-button *ngIf="isAdmin()" (click)="openDialog('Add_shelf',{})" mat-flat-button color="primary">Ajouter un rayon</button>
    
     <table mat-table [dataSource]="dataSource" #mytable class="my-table mat-elevation-z8">
    
