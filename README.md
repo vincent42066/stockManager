@@ -1,5 +1,9 @@
 # Stock manager
 
+Dans le cadre du projet "Tests et sécurité", cette application permet de gérer partiellement les stocks d'un magasin de sport.
+Il existe 3 catégories d'utilisateur existantes : Utilisateur, Administrateur et Super-administrateur.
+L'administrateur et le super-administrateur peuvent gérer les différents utilisateurs, contrairement à un simple utilisateur.
+
 # Déploiement du front-end
 
 1) Installer Node.js
