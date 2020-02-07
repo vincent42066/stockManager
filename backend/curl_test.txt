@@ -16,6 +16,7 @@ curl -G http://localhost:5002/getItemfromSectionID -d "ID=1"
 curl -G http://localhost:5002/getUserFromShopID -d "ID=0"
 
 
-curl -d "ID=1&Amount=27" -X POST http://localhost:5002/updateAmountItem
+curl -d "ID=1&Name=Casque&Description=casque pour longboard&Price=12.67&Amount=27&Section=1&Category=1" -X POST http://localhost:5002/updateAmountItem
 
 
+curl -d "ID=1&Name=CHASSE" -X POST http://localhost:5002/updateAmountItem

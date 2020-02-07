@@ -1,1 +1,0 @@
-select * from USER WHERE mail EQUALS pierre.jeanne96@gmail.com

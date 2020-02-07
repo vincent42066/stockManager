@@ -204,26 +204,71 @@ def updateAmountItem():
 	try:
 		if request.method == "POST":
 			
-			input_ID = request.form['ID'] 
+			input_ID = request.form['ID']
+			input_Name = request.form['Name'] 
+			input_Descprition = request.form['Description']  
+			input_Price = request.form['Price'] 
 			input_Amount = request.form['Amount'] 
-			print(input_ID)
-			print(input_Amount)
+			input_Section = request.form['Section'] 
+			input_Category = request.form['Category'] 
+			
+			#print(input_ID)
+			#print(input_Name)
+			#print(input_Descprition)
+			#print(input_Price)
+			#print(input_Amount)
+			#print(input_Category)
 			con = sql.connect("DB.db")
 			#con.row_factory = sql.Row
 			cur = con.cursor()
-			cur.execute("UPDATE ITEM  SET Amount = ?  WHERE ID = ?",(input_Amount,input_ID,))
+			ret =cur.execute("UPDATE ITEM  SET  Name=?,Description=?,Price=?,Amount=?,SectionID=?,CategoryID=?  WHERE ID =?",(input_Name,input_Descprition,input_Price,input_Amount,input_Section,input_Category,input_ID,))
 			con.commit()
 			#rows = cur.fetchall()
+			#print(ret)
+			#print(rows)
+			return jsonify({'text':'update item ok '})
+			con.close()
+			
 		
    
-	except sqlite3.Error as e:
+	except Exception as e:
+		print("Exception !!!!")
+		print(e)
 		con.rollback()
-		print(type(e).__name__) 
-		#return render_template("login.html", error = error) // plus tard custom page  
-		return jsonify({'text':'update item fail '})
-	finally:
-		return jsonify({'text':'item update OK '})
 		con.close()
+		
+@app.route("/updateSection",methods=["GET","POST"])
+def updateSection():
+	error = ''
+	try:
+		if request.method == "POST":
+			
+			input_ID = request.form['ID']
+			input_Name = request.form['Name'] 
+			
+
+			con = sql.connect("DB.db")
+			#con.row_factory = sql.Row
+			cur = con.cursor()
+			ret = cur.execute("UPDATE SECTION  SET  Name=?  WHERE ID =?",(input_Name,input_ID,))
+			con.commit()
+			#rows = cur.fetchall()
+			#print(ret)
+			#print(rows)
+			return jsonify({'text':'update item ok '})
+			con.close()
+			
+		
+   
+	except Exception as e:
+		print("Exception !!!!")
+		print(e)
+		con.rollback()
+		con.close()
+		
+		
+
+		
 		
 		
 if __name__ == '__main__':
