@@ -27,6 +27,24 @@ http://localhost:4200/login
 
 
 
+# Déploiement du back-end
 
+1) Installer python3 + venv
+
+`sudo apt install python3`
+`sudo apt install python3-pip`
+`sudo apt install python3-venv`
+
+
+2) créer le virtualenv et installer les dependances
+
+`cd backend.py`
+`python -m venv env`
+`source env/bin/activate`
+`pip install -r requirements.txt`
+
+3) Lancement du serveur en localhost
+
+ `python backed.py`
 
 
