@@ -14,7 +14,7 @@ export interface StoresData {
 const ELEMENT_DATA: StoresData[] = [
   {id: 0, name: 'Tours'},
   {id: 1, name: 'Bordeaux'},
-  {id: 3, name: 'Pierre'},
+  {id: 3, name: 'Poitiers'},
   {id: 4, name: 'Limoges'}
 ];
 
@@ -34,53 +34,13 @@ export class ManageStoresComponent implements OnInit {
   ngOnInit() {
     const currentUser = this.authenticationService.currentUserValue;
     if (currentUser) {
-        if (currentUser.role === Role.User) {
+        if (currentUser.role != Role.SuperAdmin) {
           this.router.navigate(['/manage-shelf']);
         }
     }
   }
-  openDialog(action,obj) {
-    obj.action = action;
-    const dialogRef = this.dialog.open(DialogBoxComponent, {
-      width: '250px',
-      data:obj
-    });
 
-    dialogRef.afterClosed().subscribe(result => {
-      if(result.event == 'Add'){
-        this.addRowData(result.data);
-      }else if(result.event == 'Update'){
-        this.updateRowData(result.data);
-      }else if(result.event == 'Delete'){
-        this.deleteRowData(result.data);
-      }
-    });
+  goToShelves(element){
+    this.router.navigate(['/manage-shelf']);
   }
- 
-  addRowData(row_obj){
-    var d = new Date();
-    this.dataSource.push({
-      id:d.getTime(),
-      name:row_obj.name
-    });
-    this.table.renderRows();
-    
-  }
-  updateRowData(row_obj){
-    this.dataSource = this.dataSource.filter((value,key)=>{
-      if(value.id == row_obj.id){
-        value.name = row_obj.name;
-      }
-      return true;
-    });
-  }
-  deleteRowData(row_obj){
-    this.dataSource = this.dataSource.filter((value,key)=>{
-      return value.id != row_obj.id;
-    });
-  }
-  goToStore(element){
-    this.router.navigateByUrl('/manage-users', { state: element });
-  }
-
 }
